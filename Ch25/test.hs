@@ -1,5 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 
+import Control.Applicative
+
 newtype Identity a = Identity { runIdentity :: a }
 
 instance Functor Identity where
@@ -15,7 +17,13 @@ instance (Applicative f, Applicative g) => Applicative (Compose f g) where
     pure a = Compose . pure . pure $ a
 
     (<*>) :: Compose f g (a -> b) -> Compose f g a -> Compose f g b
-    (Compose f) <*> (Compose a) = Compose 
+    (Compose f) <*> (Compose a) = Compose $ liftA2 (<*>) f a
+
+instance (Foldable f, Foldable g) => Foldable (Compose f g) where
+    foldMap f (Compose a) = foldMap (foldMap f) a
+
+instance (Traversable f, Traversable g) => Traversable (Compose f g) where
+    traverse f (Compose a) = traverse (traverse f) a
 
 newtype One f a = One (f a) deriving (Eq, Show)
 
