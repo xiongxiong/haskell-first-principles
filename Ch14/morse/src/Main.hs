@@ -19,12 +19,13 @@ main = do
                 _ -> argError
         _ -> argError
 
-    where argError = do 
-        putStrLn "Please specify the \
-            \ first argument \
-            \ as being 'from' or\
-            \ 'to' morse,\
-            \ such as: morse to"
+    where 
+      argError = do 
+        putStrLn "Please specify the\
+                    \ first argument\
+                    \ as being 'from' or\
+                    \ 'to' morse,\
+                    \ such as: morse to"
         exitFailure 
 
 convertToMorse :: IO ()
