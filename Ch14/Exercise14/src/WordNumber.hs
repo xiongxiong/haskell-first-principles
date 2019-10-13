@@ -1,7 +1,7 @@
 module WordNumber where
 
 import Data.List (intersperse)
-
+ 
 cattyConny :: String -> String -> String 
 cattyConny x y = x ++ " mrow " ++ y
 

@@ -7,8 +7,7 @@ import Test.QuickCheck
 import Test.QuickCheck.Gen (oneof)
 
 main :: IO ()
-main = do
-    sample trivialGen
+main = sample trivialGen
 
 data Trivial = Trivial deriving (Eq, Show)
 
@@ -18,12 +17,10 @@ trivialGen = return Trivial
 instance Arbitrary Trivial where 
     arbitrary = trivialGen
 
-data Identity a = Identity a deriving (Eq, Show)
+newtype Identity a = Identity a deriving (Eq, Show)
 
 identityGen :: Arbitrary a => Gen (Identity a)
-identityGen = do
-  a <- arbitrary
-  return (Identity a)
+identityGen = Identity <$> arbitrary 
 
 instance Arbitrary a => Arbitrary (Identity a) where 
   arbitrary = identityGen
@@ -44,8 +41,10 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (Pair a b) where
 pairGen :: (Arbitrary a, Arbitrary b) => Gen (Pair a b)
 pairGen = do
   a <- arbitrary
-  b <- arbitrary
-  return (Pair a b)
+  Pair a <$> arbitrary
+
+pairGen1 :: (Arbitrary a, Arbitrary b) => Gen (Pair a b)
+pairGen1 = Pair <$> arbitrary <*> arbitrary 
 
 pairGenIntString :: Gen (Pair Int String)
 pairGenIntString = pairGen
@@ -77,3 +76,4 @@ trueGen = coarbitrary True arbitrary
 
 falseGen :: Gen Int
 falseGen = coarbitrary False arbitrary
+
