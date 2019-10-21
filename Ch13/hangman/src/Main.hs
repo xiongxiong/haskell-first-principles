@@ -79,9 +79,11 @@ handleGuess puzzle guess = do
     (True, _) -> do
       putStrLn "This character was in the word, filling in the word accordingly."
       return (fillInCharacterCorrect puzzle guess)
+      -- return (fillInCharacter puzzle guess)
     (False, _) -> do
       putStrLn "This character wasn't in the word, try again."
       return (fillInCharacterWrong puzzle guess)
+      -- return (fillInCharacter puzzle guess)
 
 gameOver :: Puzzle -> IO ()
 gameOver (Puzzle wordToGuess _ guessed wrongs) = 
@@ -108,3 +110,17 @@ runGame puzzle = forever $ do
   case guess of
     [c] -> handleGuess puzzle c >>= runGame
     _ -> putStrLn "Your guess must be a single character"
+
+  -- ===========================================================
+
+fillInCharacter :: Puzzle -> Char -> Puzzle
+fillInCharacter (Puzzle word filledInSoFar s) c =
+  Puzzle word newFilledInSoFar (c : s)
+  where   
+    zipper guessed wordChar guessChar =
+      if wordChar == guessed
+        then Just wordChar
+        else guessChar
+    newFilledInSoFar = 
+      let zd = (zipper c)   
+      in zipWith zd word filledInSoFar

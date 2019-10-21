@@ -3,6 +3,7 @@ module Using where
 import Data.List (sort)
 import Test.QuickCheck
 import Type.Reflection
+import Data.Char
 
 half x = x / 2
 
@@ -72,3 +73,29 @@ g (NonZero x) = (read (show x)) == x
 square x = x * x
 
 squareIdentity x = (square . sqrt) x == x
+
+-- ===============================================================
+
+capitalizeWord :: String -> String
+capitalizeWord [] = []
+capitalizeWord (x : xs) = toUpper x : xs
+
+twice f = f . f
+
+fourTimes = twice . twice
+
+checkCapitalizeWord :: String -> Bool
+checkCapitalizeWord x = (capitalizeWord x == twice capitalizeWord x) && (capitalizeWord x == fourTimes capitalizeWord x)
+
+checkSort :: String -> Bool
+checkSort x = (sort x == twice sort x) && (sort x == fourTimes sort x)
+
+-- ===============================================================
+
+data Fool = Fulse | Frue deriving (Eq, Show)
+
+-- instance Arbitrary Fool where
+--     arbitrary = frequency [(1, return Fulse), (1, return Frue)]
+
+instance Arbitrary Fool where
+    arbitrary = frequency [(2, return Fulse), (1, return Frue)]
