@@ -30,7 +30,7 @@ version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
 bindir     = "/home/wonderbear/Projects/haskell/haskell-first-principles/Ch16/Exercise16/.stack-work/install/x86_64-linux/1609b951cfe7d766fa53ddd882cf5c1a3e941d161a51f88962422812cced487b/8.6.5/bin"
-libdir     = "/home/wonderbear/Projects/haskell/haskell-first-principles/Ch16/Exercise16/.stack-work/install/x86_64-linux/1609b951cfe7d766fa53ddd882cf5c1a3e941d161a51f88962422812cced487b/8.6.5/lib/x86_64-linux-ghc-8.6.5/Exercise16-0.1.0.0-7ndvmdYQOnjJ9hg9o9IbnP-Exercise16"
+libdir     = "/home/wonderbear/Projects/haskell/haskell-first-principles/Ch16/Exercise16/.stack-work/install/x86_64-linux/1609b951cfe7d766fa53ddd882cf5c1a3e941d161a51f88962422812cced487b/8.6.5/lib/x86_64-linux-ghc-8.6.5/Exercise16-0.1.0.0-4WzNMsNAhOG1vDl8dEBINj-Exercise16"
 dynlibdir  = "/home/wonderbear/Projects/haskell/haskell-first-principles/Ch16/Exercise16/.stack-work/install/x86_64-linux/1609b951cfe7d766fa53ddd882cf5c1a3e941d161a51f88962422812cced487b/8.6.5/lib/x86_64-linux-ghc-8.6.5"
 datadir    = "/home/wonderbear/Projects/haskell/haskell-first-principles/Ch16/Exercise16/.stack-work/install/x86_64-linux/1609b951cfe7d766fa53ddd882cf5c1a3e941d161a51f88962422812cced487b/8.6.5/share/x86_64-linux-ghc-8.6.5/Exercise16-0.1.0.0"
 libexecdir = "/home/wonderbear/Projects/haskell/haskell-first-principles/Ch16/Exercise16/.stack-work/install/x86_64-linux/1609b951cfe7d766fa53ddd882cf5c1a3e941d161a51f88962422812cced487b/8.6.5/libexec/x86_64-linux-ghc-8.6.5/Exercise16-0.1.0.0"
