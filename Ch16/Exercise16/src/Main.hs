@@ -1,7 +1,7 @@
 module Main where
 
 import ReplaceExperiment
-import qualified Instances as I
+import Law
 import Test.QuickCheck
 import Test.QuickCheck.Function
 
@@ -59,12 +59,6 @@ data Or a b = First a | Second b deriving (Eq, Show)
 instance Functor (Or a) where
   fmap _ (First a) = First a
   fmap f (Second b) = Second (f b)
-
-functorIdentity :: (Functor f, Eq (f a)) => f a -> Bool
-functorIdentity f = fmap id f == f
-
-functorCompose :: (Functor f, Eq (f c)) => (a -> b) -> (b -> c) -> f a -> Bool
-functorCompose f g x = fmap (g . f) x == fmap g (fmap f x)
 
 --
 
