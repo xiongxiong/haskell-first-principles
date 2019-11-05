@@ -2,6 +2,11 @@ module Main where
 
 import Control.Applicative
 import Data.List (elemIndex)
+import Apl1
+import Data.Monoid
+import Test.QuickCheck
+import Test.QuickCheck.Checkers
+import Test.QuickCheck.Classes
 
 main :: IO ()
 main = do
@@ -138,7 +143,7 @@ cowFromString :: String -> Int -> Int -> Maybe Cow
 --               Just (Cow nammy agey weighty)
 cowFromString name' age' weight' =
   Cow <$> noEmpty name' <*> noNegative age' <*> noNegative weight'
-cowFromString name' age' weight' =
-  liftA3 Cow (noEmpty name') (noNegative age') (noNegative weight')
+-- cowFromString name' age' weight' =
+--   liftA3 Cow (noEmpty name') (noNegative age') (noNegative weight')
 
 
