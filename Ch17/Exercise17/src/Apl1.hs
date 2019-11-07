@@ -20,6 +20,21 @@ instance Eq a => EqProp (ZipList a) where
 
 data CList a = Nil | Cons a (CList a) deriving (Eq, Show)
 
+take' :: Int -> CList a -> CList a 
+take' _ Nil = Nil
+take' 0 _ = Nil
+take' n (Cons x xs) = Cons x $ take' (n - 1) xs
+
+instance Arbitrary a => Arbitrary (CList a) where
+    arbitrary = Cons <$> arbitrary <*> arbitrary
+
+instance Eq a => EqProp (CList a) where
+    xs =-= ys = xs' `eq` ys'
+        where
+            xs' = take' 3000 xs
+            ys' = take' 3000 ys
+
+
 instance Semigroup (CList a) where
     (<>) Nil cons = cons
     (<>) (Cons x xs) cons = Cons x $ xs <> cons
