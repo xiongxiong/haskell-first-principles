@@ -1,6 +1,11 @@
 module Main where
 
 import Control.Monad
+import EitherMonad
+import Test.QuickCheck
+import Test.QuickCheck.Checkers
+import Test.QuickCheck.Classes
+import BadMonad
 
 --
 

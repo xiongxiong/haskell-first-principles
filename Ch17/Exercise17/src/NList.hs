@@ -15,7 +15,7 @@ repeat' :: a -> List a
 repeat' x = Cons x (repeat' x)
 
 instance Arbitrary a => Arbitrary (List a) where
-    arbitrary = Cons <$> arbitrary <*> arbitrary
+    arbitrary = frequency [(1, return Nil), (1, Cons <$> arbitrary <*> arbitrary)]
 
 instance Eq a => EqProp (List a) where
     xs =-= ys = xs' `eq` ys'
