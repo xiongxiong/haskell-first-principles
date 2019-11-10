@@ -2,6 +2,7 @@ module Main where
 
 import Control.Applicative
 import Data.List (elemIndex)
+import BadMonoid
 
 main :: IO ()
 main = do
