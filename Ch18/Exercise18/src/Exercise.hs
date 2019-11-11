@@ -3,8 +3,6 @@ module Exercise where
 import Test.QuickCheck
 import Test.QuickCheck.Checkers
 import Test.QuickCheck.Classes
-import Control.Monad
-import Control.Applicative
 
 data Nope a = NopeDotJpg deriving (Eq, Show)
 
@@ -112,15 +110,21 @@ monadList = quickBatch $ monad $ (undefined :: List (Int, Int, Int))
 --
 
 j :: Monad m => m (m a) -> m a
-j = join
+j x = x >>= id
     
 l1 :: Monad m => (a -> b) -> m a -> m b
 l1 = fmap
 
 l2 :: Monad m => (a -> b -> c) -> m a -> m b -> m c
-l2 = liftA2
+l2 f ma mb = fmap f ma <*> mb
 
 a :: Monad m => m a -> m (a -> b) -> m b
 a = flip (<*>)
 
-meh :: Monad m => [a] -> (a -> m b) -> m [b]
+meh :: (Monad m, Monoid (m [b])) => [a] -> (a -> m b) -> m [b]
+-- meh xs f = mconcat $ fmap (fmap pure) $ fmap f xs
+meh [] _ = mempty
+meh (x : xs) f = fmap pure (f x) <> meh xs f
+
+flipType :: (Monad m, Monoid (m [a])) => [m a] -> m [a]
+flipType ms = meh ms id
