@@ -14,7 +14,8 @@ import Web.Scotty
 
 main :: IO ()
 main = do
-  putStrLn "hello world"
+  rConn <- R.connect R.defaultConnectInfo 
+  scotty 3000 (app rConn)
 
 alphaNum :: String
 alphaNum = ['A'..'Z'] ++ ['0'..'9']
@@ -73,7 +74,7 @@ shortyFound tbs = TL.concat
   ]
 
 app :: R.Connection -> ScottyM ()
-app rConn =
+app rConn = do
   get "/" $ do
     uri <- param "uri"
     let parsedUri :: Maybe URI
@@ -86,3 +87,14 @@ app rConn =
         resp <- liftIO (saveURI rConn shorty uri')
         html (shortyCreated resp shawty)
       Nothing -> text (shortyAintUri uri)
+  get "/:short" $ do
+    short <- param "short"
+    uri <- liftIO (getURI rConn short)
+    case uri of
+      Left reply ->
+        text (TL.pack (show reply))
+      Right mbBS -> case mbBS of
+        Nothing -> text "uri not found"
+        Just bs -> html (shortyFound tbs)
+          where tbs :: TL.Text
+                tbs = TL.fromStrict (decodeUtf8 bs)
