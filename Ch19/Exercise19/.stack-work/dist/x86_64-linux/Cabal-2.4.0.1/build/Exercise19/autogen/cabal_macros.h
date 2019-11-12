@@ -22,6 +22,39 @@
   (major1) == 4 && (major2) == 12 && (minor) <= 0)
 #endif /* MIN_VERSION_base */
 
+/* package conduit-1.3.1.1 */
+#ifndef VERSION_conduit
+#define VERSION_conduit "1.3.1.1"
+#endif /* VERSION_conduit */
+#ifndef MIN_VERSION_conduit
+#define MIN_VERSION_conduit(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  3 || \
+  (major1) == 1 && (major2) == 3 && (minor) <= 1)
+#endif /* MIN_VERSION_conduit */
+
+/* package persistent-2.9.2 */
+#ifndef VERSION_persistent
+#define VERSION_persistent "2.9.2"
+#endif /* VERSION_persistent */
+#ifndef MIN_VERSION_persistent
+#define MIN_VERSION_persistent(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  9 || \
+  (major1) == 2 && (major2) == 9 && (minor) <= 2)
+#endif /* MIN_VERSION_persistent */
+
+/* package persistent-postgresql-2.9.1 */
+#ifndef VERSION_persistent_postgresql
+#define VERSION_persistent_postgresql "2.9.1"
+#endif /* VERSION_persistent_postgresql */
+#ifndef MIN_VERSION_persistent_postgresql
+#define MIN_VERSION_persistent_postgresql(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  9 || \
+  (major1) == 2 && (major2) == 9 && (minor) <= 1)
+#endif /* MIN_VERSION_persistent_postgresql */
+
 /* package scotty-0.11.5 */
 #ifndef VERSION_scotty
 #define VERSION_scotty "0.11.5"
@@ -32,6 +65,50 @@
   (major1) == 0 && (major2) <  11 || \
   (major1) == 0 && (major2) == 11 && (minor) <= 5)
 #endif /* MIN_VERSION_scotty */
+
+/* package text-1.2.3.1 */
+#ifndef VERSION_text
+#define VERSION_text "1.2.3.1"
+#endif /* VERSION_text */
+#ifndef MIN_VERSION_text
+#define MIN_VERSION_text(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  2 || \
+  (major1) == 1 && (major2) == 2 && (minor) <= 3)
+#endif /* MIN_VERSION_text */
+
+/* package time-1.8.0.2 */
+#ifndef VERSION_time
+#define VERSION_time "1.8.0.2"
+#endif /* VERSION_time */
+#ifndef MIN_VERSION_time
+#define MIN_VERSION_time(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  8 || \
+  (major1) == 1 && (major2) == 8 && (minor) <= 0)
+#endif /* MIN_VERSION_time */
+
+/* package uuid-1.3.13 */
+#ifndef VERSION_uuid
+#define VERSION_uuid "1.3.13"
+#endif /* VERSION_uuid */
+#ifndef MIN_VERSION_uuid
+#define MIN_VERSION_uuid(major1,major2,minor) (\
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  3 || \
+  (major1) == 1 && (major2) == 3 && (minor) <= 13)
+#endif /* MIN_VERSION_uuid */
+
+/* package wreq-0.5.3.2 */
+#ifndef VERSION_wreq
+#define VERSION_wreq "0.5.3.2"
+#endif /* VERSION_wreq */
+#ifndef MIN_VERSION_wreq
+#define MIN_VERSION_wreq(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  5 || \
+  (major1) == 0 && (major2) == 5 && (minor) <= 3)
+#endif /* MIN_VERSION_wreq */
 
 /* tool alex-3.2.3 */
 #ifndef TOOL_VERSION_alex
@@ -166,7 +243,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "Exercise19-0.1.0.0-FuU0jH9mw9kC6ODAkyld7t-Exercise19"
+#define CURRENT_COMPONENT_ID "Exercise19-0.1.0.0-JsYSpQaYlYvEuLfh1O3G7I-Exercise19"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

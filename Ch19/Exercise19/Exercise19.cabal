@@ -20,4 +20,9 @@ executable Exercise19
         base >=4.7 && <5,
         scotty -any,
         persistent -any,
-        conduit -any
+        conduit -any,
+        persistent-postgresql -any,
+        wreq -any,
+        uuid -any,
+        text -any,
+        time -any
