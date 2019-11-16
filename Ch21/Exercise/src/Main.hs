@@ -1,10 +1,19 @@
 module Main where
 
 import Data.Traversable
+import Test.QuickCheck
+import Test.QuickCheck.Checkers
+import Test.QuickCheck.Classes
+import TypeClasses
+import SkiFree
+
+type TI = []
 
 main :: IO ()
 main = do
-  putStrLn "hello world"
+  let trigger :: TI (Int, Int, [Int])
+      trigger = undefined
+  quickBatch (traversable trigger)
 
 data Query = Query
 data SomeObj = SomeObj

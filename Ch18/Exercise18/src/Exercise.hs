@@ -1,8 +1,11 @@
 module Exercise where
 
+import Data.List
+import Control.Applicative
 import Test.QuickCheck
 import Test.QuickCheck.Checkers
 import Test.QuickCheck.Classes
+import Debug.Trace
 
 data Nope a = NopeDotJpg deriving (Eq, Show)
 
@@ -104,6 +107,14 @@ instance Applicative List where
 instance Monad List where
     Nil >>= _ = Nil
     Cons x xs >>= f = f x <> (xs >>= f)
+
+instance Foldable List where
+    foldr _ z Nil = z
+    foldr f z (Cons x xs) = f x (foldr f z xs)
+
+instance Traversable List where
+    traverse f = foldr cons_f (pure Nil)
+        where cons_f x ys = liftA2 Cons (f x) ys
 
 monadList = quickBatch $ monad $ (undefined :: List (Int, Int, Int))
 
