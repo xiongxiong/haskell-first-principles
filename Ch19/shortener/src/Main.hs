@@ -13,9 +13,10 @@ import qualified System.Random as SR
 import Web.Scotty
 
 main :: IO ()
-main = do
-  rConn <- R.connect R.defaultConnectInfo 
-  scotty 3000 (app rConn)
+-- main = do
+--   rConn <- R.connect R.defaultConnectInfo 
+--   scotty 3000 (app rConn)
+main = scotty 3000 <$> app =<< R.connect R.defaultConnectInfo 
 
 alphaNum :: String
 alphaNum = ['A'..'Z'] ++ ['0'..'9']
