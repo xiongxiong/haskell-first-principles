@@ -4,6 +4,7 @@ module RandomExample2 where
 import Control.Applicative (liftA3)
 import Control.Monad (replicateM)
 import Control.Monad.Trans.State
+import Control.Monad.IO.Class
 import System.Random
 import RandomExample
 
@@ -85,6 +86,9 @@ fizzBuzz n
         | n `mod` 3 == 0 = "Fizz"
         | otherwise = show n
 
+helloOne :: IO ()
+helloOne = mapM_ (putStrLn . fizzBuzz) [1..100]
+
 fizzbuzzList :: [Integer] -> [String]
 fizzbuzzList list = execState (mapM_ addResult list) []
 
@@ -93,4 +97,7 @@ addResult n = do
     xs <- get
     let result = fizzBuzz n
     put (result : xs)
+
+helloTwo :: IO ()
+helloTwo = mapM_ putStrLn $ reverse $ fizzbuzzList [1..100]
 

@@ -33,17 +33,6 @@
   (major1) == 0 && (major2) == 8 && (minor) <= 0)
 #endif /* MIN_VERSION_dlist */
 
-/* package mtl-2.2.2 */
-#ifndef VERSION_mtl
-#define VERSION_mtl "2.2.2"
-#endif /* VERSION_mtl */
-#ifndef MIN_VERSION_mtl
-#define MIN_VERSION_mtl(major1,major2,minor) (\
-  (major1) <  2 || \
-  (major1) == 2 && (major2) <  2 || \
-  (major1) == 2 && (major2) == 2 && (minor) <= 2)
-#endif /* MIN_VERSION_mtl */
-
 /* package random-1.1 */
 #ifndef VERSION_random
 #define VERSION_random "1.1"
@@ -155,8 +144,11 @@
 #endif /* MIN_TOOL_VERSION_runghc */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-Hi0fWLo7B33J95MsaKM5Vp-Exercise"
+#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-IXIJT3qJd7n1dQOY2VULn8-Exercise"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
 #endif /* CURRENT_PACKAGE_VERSION */
+
+#undef CURRENT_PACKAGE_KEY
+#undef CURRENT_COMPONENT_ID
