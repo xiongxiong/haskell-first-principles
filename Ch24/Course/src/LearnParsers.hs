@@ -1,5 +1,8 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module LearnParsers where
 
+import Control.Monad.IO.Class
 import Text.Trifecta
 import Text.Parser.Combinators
 
@@ -27,8 +30,14 @@ oneTwo' = oneTwo >> stop
 oneEOF :: Parser Char
 oneEOF = one <* eof
 
-meantime :: IO ()
-meantime = (,,)
+meantime :: String -> IO ()
+meantime s = (print . parseString (string "1") mempty $ s) >> (print . parseString (string "12") mempty $ s) >> (print . parseString (string "123") mempty $ s)
+
+meantime' :: String -> [String] -> IO ()
+meantime' s ts = foldr1 (>>) $ print <$> (parseString <$> (string <$> ts) <*> pure mempty <*> pure s)
+
+string' :: (CharParsing m, Monad m, MonadIO m) => String -> m String
+string' s = sequence $ char <$> s
 
 testParse :: Show a => Parser a -> IO ()
 testParse p = print $ parseString p mempty "123"
