@@ -1,7 +1,8 @@
 module Main where
 
-import Control.Applicative
-import Text.Trifecta
+import           Control.Applicative
+import           Text.Trifecta
+import           Data.Maybe                     ( isNothing )
 
 
 main :: IO ()
@@ -15,6 +16,16 @@ data NumberOrString = NOSS String | NOSI Integer deriving (Eq, Show)
 numberOrString :: Parser NumberOrString
 numberOrString = NOSS <$> some letter <|> NOSI <$> integer
 
+type HyphenOrNot = Maybe Char
+
+hyphenOrNot :: Parser HyphenOrNot
+hyphenOrNot = Just <$> char '-' <|> return Nothing
+
+type CharOrNot = Maybe Char
+
+charOrNot :: Char -> Parser CharOrNot
+charOrNot c = Just <$> char c <|> return Nothing
+
 type Major = Integer
 type Minor = Integer
 type Patch = Integer
@@ -22,20 +33,26 @@ type Patch = Integer
 type Release = [NumberOrString]
 type Metadata = [NumberOrString]
 
-data SemVer = SemVer Major Minor Patch Release Metadata
+data SemVer = SemVer Major Minor Patch Release Metadata deriving (Eq, Show)
 
 parseSemVer :: Parser SemVer
 parseSemVer = do
   major <- integer
-  _ <- char '.'
+  _     <- char '.'
   minor <- integer
-  _ <- char '.'
+  _     <- char '.'
   patch <- integer
-  _ <- char '.'
-  release <- many numberOrString
-  _ <- char '.'
-  metadata <- many numberOrString
-  return $ SemVer major minor patch release metadata
+  h1    <- hyphenOrNot
+  if isNothing h1
+    then return $ SemVer major minor patch [] []
+    else do
+      release <- many (numberOrString <* charOrNot '.')
+      h2      <- hyphenOrNot
+      if isNothing h2
+        then return $ SemVer major minor patch release []
+        else do
+          metadata <- many (numberOrString <* charOrNot '.')
+          return $ SemVer major minor patch release metadata
 
 ---------------------------------------------------------------------
 
