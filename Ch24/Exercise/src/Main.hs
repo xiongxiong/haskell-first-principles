@@ -9,6 +9,7 @@ import           Data.Maybe                     ( isNothing )
 import Data.List
 import        Test.QuickCheck
 import Text.RawString.QQ
+import Control.Monad
 
 
 main :: IO ()
@@ -246,7 +247,7 @@ instance Arbitrary LogActivity where
   arbitrary = LogActivity <$> arbitrary <*> arbitrary <*> arbitrary
 
 parseLogActivity :: Parser LogActivity
-parseLogActivity = LogActivity <$> parseLogTime <*> (Title <$> (spaces *> many (letter <|> char ' '))) <*> parseMaybeLogComment
+parseLogActivity = LogActivity <$> parseLogTime <*> (Title <$> (spaces *> stringLiteral)) <*> parseMaybeLogComment
 
 data LogDay = LogDay LogDate [LogActivity]
 
@@ -255,7 +256,7 @@ instance Show LogDay where
 
 instance Arbitrary LogDay where
   -- arbitrary = LogDay <$> arbitrary <*> (sequence $ arbitrary <$ [1..10])
-  arbitrary = LogDay <$> arbitrary <*> (sequence $ replicate 10 arbitrary)
+  arbitrary = LogDay <$> arbitrary <*> replicateM 10 arbitrary
 
 parseLogDay :: Parser LogDay
 parseLogDay = LogDay <$> (parseLogDate <* spaces) <*> many (parseLogActivity <* spaces)
@@ -263,10 +264,10 @@ parseLogDay = LogDay <$> (parseLogDate <* spaces) <*> many (parseLogActivity <* 
 data Log = Log [LogComment] [LogDay]
 
 instance Show Log where
-  show (Log cs ds) = concat [(concat $ (++ "\n") . show <$> cs), "\n", (concat $ (++ "\n") . show <$> ds)]
+  show (Log cs ds) = concat [(concat $ (++ "\n") . show <$> cs), "\n", concat $ (++ "\n") . show <$> ds]
 
 instance Arbitrary Log where
-  arbitrary = Log <$> (frequency $ (,) 1 . sequence . (flip replicate) arbitrary <$> [1..3]) <*> (sequence $ replicate 2 arbitrary)
+  arbitrary = Log <$> (frequency $ (,) 1 . sequence . flip replicate arbitrary <$> [1..3]) <*> replicateM 2 arbitrary
 
 parseLog :: Parser Log
 parseLog = Log <$> many (parseLogComment <* spaces) <*> many (parseLogDay <* spaces)
