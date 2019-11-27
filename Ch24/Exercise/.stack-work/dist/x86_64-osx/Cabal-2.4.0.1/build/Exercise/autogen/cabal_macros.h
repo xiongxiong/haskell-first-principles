@@ -11,6 +11,17 @@
   (major1) == 0 && (major2) == 1 && (minor) <= 0)
 #endif /* MIN_VERSION_Exercise */
 
+/* package QuickCheck-2.13.2 */
+#ifndef VERSION_QuickCheck
+#define VERSION_QuickCheck "2.13.2"
+#endif /* VERSION_QuickCheck */
+#ifndef MIN_VERSION_QuickCheck
+#define MIN_VERSION_QuickCheck(major1,major2,minor) (\
+  (major1) <  2 || \
+  (major1) == 2 && (major2) <  13 || \
+  (major1) == 2 && (major2) == 13 && (minor) <= 2)
+#endif /* MIN_VERSION_QuickCheck */
+
 /* package aeson-1.4.6.0 */
 #ifndef VERSION_aeson
 #define VERSION_aeson "1.4.6.0"
@@ -243,7 +254,7 @@
 #endif /* MIN_TOOL_VERSION_runghc */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-Eb2qMDWSPW1AaeBXwcv1Cw-Exercise"
+#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-jgzchjaZoLIaFcFXPnDQ4-Exercise"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
