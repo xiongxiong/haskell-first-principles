@@ -14,7 +14,7 @@ main = do
 data NumberOrString = NOSS String | NOSI Integer deriving (Eq, Show)
 
 numberOrString :: Parser NumberOrString
-numberOrString = NOSS <$> some letter <|> NOSI <$> integer
+numberOrString = NOSS <$> some letter <|> NOSI <$> natural
 
 type HyphenOrNot = Maybe Char
 
