@@ -29,4 +29,5 @@ executable Exercise
                        parsec,
                        utf8-string,
                        aeson,
-                       scientific
+                       scientific,
+                       QuickCheck
