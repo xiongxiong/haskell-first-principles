@@ -10,7 +10,7 @@ import Data.List
 import        Test.QuickCheck
 import Text.RawString.QQ
 import Control.Monad
-
+import Data.Word
 
 main :: IO ()
 main = do
@@ -210,10 +210,7 @@ instance Arbitrary LogComment where
     ]
 
 parseLogComment :: Parser LogComment
-parseLogComment = try $ LogComment <$> (spaces *> string "--" *> spaces *> many (notChar '\n'))
-
-parseMaybeLogComment :: Parser (Maybe LogComment)
-parseMaybeLogComment = (Just <$> parseLogComment) <|> return Nothing
+parseLogComment = try $ LogComment <$> (spaces *> string "--" *> spaces *> some (notChar '\n'))
 
 data LogDate = LogDate Year Month Day (Maybe LogComment)
 
@@ -224,7 +221,7 @@ instance Arbitrary LogDate where
   arbitrary = LogDate <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
 
 parseLogDate :: Parser LogDate
-parseLogDate = LogDate <$> (Year <$> (char '#' *> spaces *> natural)) <*> (Month <$> (char '-' *> natural)) <*> (Day <$> (char '-' *> natural)) <*> parseMaybeLogComment
+parseLogDate = LogDate <$> (Year <$> (char '#' *> spaces *> natural)) <*> (Month <$> (char '-' *> natural)) <*> (Day <$> (char '-' *> natural)) <*> optional parseLogComment
 
 data LogTime = LogTime Hour Minute
 
@@ -246,7 +243,7 @@ instance Arbitrary LogActivity where
   arbitrary = LogActivity <$> arbitrary <*> arbitrary <*> arbitrary
 
 parseLogActivity :: Parser LogActivity
-parseLogActivity = LogActivity <$> parseLogTime <*> (Title <$> (spaces *> stringLiteral)) <*> parseMaybeLogComment
+parseLogActivity = LogActivity <$> parseLogTime <*> (Title <$> (whiteSpace *> manyTill anyChar (try $ whiteSpace  <* ((string "--" <* whiteSpace) <|> (pure <$> newline))))) <*> ((fmap . fmap) LogComment (optional $ some $ notChar '\n'))
 
 data LogDay = LogDay LogDate [LogActivity]
 
@@ -258,7 +255,7 @@ instance Arbitrary LogDay where
   arbitrary = LogDay <$> arbitrary <*> replicateM 10 arbitrary
 
 parseLogDay :: Parser LogDay
-parseLogDay = LogDay <$> (parseLogDate <* spaces) <*> many (parseLogActivity <* spaces)
+parseLogDay = LogDay <$> (spaces *> parseLogDate <* spaces) <*> many (parseLogActivity <* spaces)
 
 data Log = Log [LogComment] [LogDay]
 
@@ -269,9 +266,15 @@ instance Arbitrary Log where
   arbitrary = Log <$> (frequency $ (,) 1 . sequence . flip replicate arbitrary <$> [1..3]) <*> replicateM 2 arbitrary
 
 parseLog :: Parser Log
-parseLog = Log <$> many (parseLogComment <* spaces) <*> many (parseLogDay <* spaces)
+parseLog = Log <$> many (spaces *> parseLogComment <* spaces) <*> many (parseLogDay <* spaces)
+
+parseok = parseString (manyTill anyChar (try $ whiteSpace <* ((string "--" <* whiteSpace) <|> (pure <$> newline)))) mempty "hello --\n"
+
+parsecc = parseString (whiteSpace >> string "--") mempty " --"
 
 ---------------------------------------------------------------------
+
+data IPAddress = IPAddress Word32 deriving (Eq, Ord, Show)
 
 ---------------------------------------------------------------------
 
