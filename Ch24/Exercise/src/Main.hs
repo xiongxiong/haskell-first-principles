@@ -210,7 +210,6 @@ instance Arbitrary LogComment where
     ]
 
 parseLogComment :: Parser LogComment
--- parseLogComment = try $ LogComment <$> (spaces *> string "--" *> spaces *> many letter <* newline)
 parseLogComment = try $ LogComment <$> (spaces *> string "--" *> spaces *> many (notChar '\n'))
 
 parseMaybeLogComment :: Parser (Maybe LogComment)
