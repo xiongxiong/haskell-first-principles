@@ -30,4 +30,5 @@ executable Exercise
                        utf8-string,
                        aeson,
                        scientific,
-                       QuickCheck
+                       QuickCheck,
+                       transformers
