@@ -3,6 +3,7 @@
 module Main where
 
 import Control.Applicative hiding (Const)
+import Control.Monad
 
 main :: IO ()
 main = do
@@ -93,6 +94,11 @@ instance Applicative m => Applicative (IdentityT m) where
 instance Monad m => Monad (IdentityT m) where
   return = pure
   (IdentityT ma) >>= f = IdentityT $ ma >>= runIdentityT . f
+  -- (IdentityT ma) >>= f = let aimb = runIdentityT . f =<< ma in IdentityT aimb
+  -- (IdentityT ma) >>= f = 
+  --   let aimb :: a
+  --       aimb = fmap f ma 
+  --   in undefined
 
 -------------------------------------------------------------------
   
