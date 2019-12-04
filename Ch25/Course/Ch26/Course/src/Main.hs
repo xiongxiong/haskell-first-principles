@@ -4,6 +4,9 @@ module Main where
 
 import Control.Applicative
 import Control.Monad
+import Control.Monad.Trans.Except
+import Control.Monad.Trans.Class
+import Control.Monad.IO.Class
 
 main :: IO ()
 main = do
@@ -105,19 +108,53 @@ instance (Monad m) => Monad (StateT s m) where
 
 ------------------------------------------------------------------
 
+embedded :: MaybeT (ExceptT String (ReaderT () IO)) Int
+-- embedded = return 1
+embedded = MaybeT (ExceptT (ReaderT (const $ pure (Right (Just 1)))))
 
+maybeUnwrap :: ExceptT String (ReaderT () IO) (Maybe Int)
+maybeUnwrap = runMaybeT embedded
+
+eitherUnwrap :: ReaderT () IO (Either String (Maybe Int))
+eitherUnwrap = runExceptT maybeUnwrap
+
+readerUnwrap :: () -> IO (Either String (Maybe Int))
+readerUnwrap = runReaderT eitherUnwrap
+
+wrap :: MaybeT (ExceptT String (ReaderT () IO)) Int
+wrap = MaybeT . ExceptT . ReaderT . pure . pure . pure . pure $ 1
 
 ------------------------------------------------------------------
 
+instance MonadTrans (MaybeT) where
+  lift = MaybeT . liftM Just
 
+instance MonadTrans (EitherT e) where
+  lift = EitherT . liftM Right
+
+instance MonadTrans (StateT s) where
+  lift m = StateT $ \s -> do
+    a <- m
+    return (a, s)
+
+instance MonadTrans (ReaderT r) where
+  lift = ReaderT . const
 
 ------------------------------------------------------------------
 
+instance (MonadIO m) => MonadIO (EitherT e m) where
+  liftIO = lift . liftIO
 
+instance (MonadIO m) => MonadIO (MaybeT m) where
+  liftIO = lift . liftIO
+
+instance (MonadIO m) => MonadIO (ReaderT r m) where
+  liftIO = lift . liftIO
+
+instance (MonadIO m) => MonadIO (StateT s m) where
+  liftIO = lift . liftIO
 
 ------------------------------------------------------------------
-
-
 
 ------------------------------------------------------------------
 

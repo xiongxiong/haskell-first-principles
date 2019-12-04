@@ -22,17 +22,6 @@
   (major1) == 4 && (major2) == 12 && (minor) <= 0)
 #endif /* MIN_VERSION_base */
 
-/* package scotty-0.11.5 */
-#ifndef VERSION_scotty
-#define VERSION_scotty "0.11.5"
-#endif /* VERSION_scotty */
-#ifndef MIN_VERSION_scotty
-#define MIN_VERSION_scotty(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  11 || \
-  (major1) == 0 && (major2) == 11 && (minor) <= 5)
-#endif /* MIN_VERSION_scotty */
-
 /* package transformers-0.5.6.2 */
 #ifndef VERSION_transformers
 #define VERSION_transformers "0.5.6.2"
@@ -177,8 +166,11 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "Course-0.1.0.0-9LriyebNNR2G7Mj7Nl9lOH-Course"
+#define CURRENT_COMPONENT_ID "Course-0.1.0.0-9toD530xOfD3crJgn98iFA-Course"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
 #endif /* CURRENT_PACKAGE_VERSION */
+
+#undef CURRENT_PACKAGE_KEY
+#undef CURRENT_COMPONENT_ID
