@@ -80,21 +80,26 @@ type Scotty = ScottyT Text (ReaderT Config IO)
 type Handler = ActionT Text (ReaderT Config IO)
 
 bumpBoomp :: Text -> M.Map Text Integer -> (M.Map Text Integer, Integer)
-bumpBoomp k m = undefined 
+bumpBoomp k m = 
+  let v = M.lookup k m in
+    case v of
+      Nothing -> (M.insert k 1 m, 1)
+      Just v' -> (M.insert k (v' + 1) m, v' + 1)
 
-app :: Scotty ()
+app :: Scotty () 
 app = get "/:key" $ do
-  unprefixed <- param "key"
-  let key' = mappend undefined unprefixed
-  newInteger <- undefined 
-  html $ mconcat ["<h1> Success! Count was: ", TL.pack $ show newInteger, "</h1>"] 
+  unprefixed <- param "key" :: Handler String
+  let m = undefined :: M.Map Text Integer
+  let key' = TL.pack $ mappend undefined unprefixed
+  let newInteger = snd $ bumpBoomp key' m
+  html $ mconcat ["<h1>Success! Count was: ", TL.pack $ show newInteger, "</h1>"]
 
-appTest :: IO ()
-appTest = do
+testApp :: IO ()
+testApp = do
   [prefixArg] <- getArgs
   counter <- newIORef M.empty
-  let config = undefined
-      runR = undefined
+  let config = Config {count = counter, prefix = TL.pack prefixArg}
+      runR rma = runReaderT rma config
   scottyT 3000 runR app
 
 ----------------------------------------------------------------

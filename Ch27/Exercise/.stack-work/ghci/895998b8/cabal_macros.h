@@ -22,50 +22,6 @@
   (major1) == 4 && (major2) == 12 && (minor) <= 0)
 #endif /* MIN_VERSION_base */
 
-/* package containers-0.6.0.1 */
-#ifndef VERSION_containers
-#define VERSION_containers "0.6.0.1"
-#endif /* VERSION_containers */
-#ifndef MIN_VERSION_containers
-#define MIN_VERSION_containers(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  6 || \
-  (major1) == 0 && (major2) == 6 && (minor) <= 0)
-#endif /* MIN_VERSION_containers */
-
-/* package scotty-0.11.5 */
-#ifndef VERSION_scotty
-#define VERSION_scotty "0.11.5"
-#endif /* VERSION_scotty */
-#ifndef MIN_VERSION_scotty
-#define MIN_VERSION_scotty(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  11 || \
-  (major1) == 0 && (major2) == 11 && (minor) <= 5)
-#endif /* MIN_VERSION_scotty */
-
-/* package text-1.2.3.1 */
-#ifndef VERSION_text
-#define VERSION_text "1.2.3.1"
-#endif /* VERSION_text */
-#ifndef MIN_VERSION_text
-#define MIN_VERSION_text(major1,major2,minor) (\
-  (major1) <  1 || \
-  (major1) == 1 && (major2) <  2 || \
-  (major1) == 1 && (major2) == 2 && (minor) <= 3)
-#endif /* MIN_VERSION_text */
-
-/* package transformers-0.5.6.2 */
-#ifndef VERSION_transformers
-#define VERSION_transformers "0.5.6.2"
-#endif /* VERSION_transformers */
-#ifndef MIN_VERSION_transformers
-#define MIN_VERSION_transformers(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  5 || \
-  (major1) == 0 && (major2) == 5 && (minor) <= 6)
-#endif /* MIN_VERSION_transformers */
-
 /* tool alex-3.2.3 */
 #ifndef TOOL_VERSION_alex
 #define TOOL_VERSION_alex "3.2.3"
@@ -199,8 +155,11 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-JNZekSDi1bX4ctnaUn0zzo-Exercise"
+#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-AhnCyqPvIWh6kzcdbGGjmP-Exercise"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
 #endif /* CURRENT_PACKAGE_VERSION */
+
+#undef CURRENT_PACKAGE_KEY
+#undef CURRENT_COMPONENT_ID
