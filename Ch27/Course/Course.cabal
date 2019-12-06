@@ -1,8 +1,8 @@
-name:                Exercise
+name:                Course
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/githubuser/Exercise#readme
+homepage:            https://github.com/githubuser/Course#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Author name here
@@ -13,12 +13,8 @@ build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
 
-executable Exercise
+executable Course
   hs-source-dirs:      src
   main-is:             Main.hs
   default-language:    Haskell2010
-  build-depends:       base >= 4.7 && < 5,
-                       transformers,
-                       containers,
-                       text,
-                       scotty
+  build-depends:       base >= 4.7 && < 5

@@ -3,7 +3,7 @@
 module Main where
 
 import Control.Monad.Trans.Reader
-import Control.Monad.Trans.State
+import Control.Monad.Trans.State hiding (get)
 import Control.Monad.Trans.Class
 import Data.Functor.Identity
 import Control.Monad.Trans.Maybe
@@ -71,8 +71,31 @@ doExcite = do
 ----------------------------------------------------------------
 
 data Config = Config {
-
+    count :: IORef (M.Map Text Integer),
+    prefix :: Text
   }
+
+type Scotty = ScottyT Text (ReaderT Config IO)
+
+type Handler = ActionT Text (ReaderT Config IO)
+
+bumpBoomp :: Text -> M.Map Text Integer -> (M.Map Text Integer, Integer)
+bumpBoomp k m = undefined 
+
+app :: Scotty ()
+app = get "/:key" $ do
+  unprefixed <- param "key"
+  let key' = mappend undefined unprefixed
+  newInteger <- undefined 
+  html $ mconcat ["<h1> Success! Count was: ", TL.pack $ show newInteger, "</h1>"] 
+
+appTest :: IO ()
+appTest = do
+  [prefixArg] <- getArgs
+  counter <- newIORef M.empty
+  let config = undefined
+      runR = undefined
+  scottyT 3000 runR app
 
 ----------------------------------------------------------------
 
