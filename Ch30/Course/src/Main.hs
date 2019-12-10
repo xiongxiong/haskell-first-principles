@@ -91,3 +91,19 @@ main = do
   threadId <- forkIO (mask_ openAndWrite)
   threadDelay 1000
   throwTo threadId PleaseDie
+
+---------------------------------------------------------------
+
+radius :: Integer -> Integer -> Integer -> IO (Integer, Integer, Integer)
+radius width height limit = do
+  let l = max width height
+  let s = min width height
+  let r = floor $ fromIntegral s / (2 * sqrt 2)
+  return $ go r l s
+  where
+    go :: Integer -> Integer -> Integer -> (Integer, Integer, Integer)
+    go r l s = let (c, x, y) = count r l s in if c < limit then go (r - 1) l s else (r, x, y)
+    count :: Integer -> Integer -> Integer -> (Integer, Integer, Integer)
+    count r l s = let x = floor $ realToFrac s / (sqrt 2 * fromIntegral r)
+                      y = floor $ realToFrac (2 * l - r) / realToFrac (3 * r)
+                  in (y * x - div y 2, x , y)

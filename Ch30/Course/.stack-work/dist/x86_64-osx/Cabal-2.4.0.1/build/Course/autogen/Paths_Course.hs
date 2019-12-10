@@ -30,7 +30,7 @@ version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
 bindir     = "/Users/wonderbear/Exercise/Haskell/haskell-first-principles/Ch30/Course/.stack-work/install/x86_64-osx/89388ac213f6a72baccc7183496404f9ca677277b7c424beabf03b38b4b7792c/8.6.5/bin"
-libdir     = "/Users/wonderbear/Exercise/Haskell/haskell-first-principles/Ch30/Course/.stack-work/install/x86_64-osx/89388ac213f6a72baccc7183496404f9ca677277b7c424beabf03b38b4b7792c/8.6.5/lib/x86_64-osx-ghc-8.6.5/Course-0.1.0.0-YGG5f6figxK3GycjP5vnA-Course"
+libdir     = "/Users/wonderbear/Exercise/Haskell/haskell-first-principles/Ch30/Course/.stack-work/install/x86_64-osx/89388ac213f6a72baccc7183496404f9ca677277b7c424beabf03b38b4b7792c/8.6.5/lib/x86_64-osx-ghc-8.6.5/Course-0.1.0.0-DG6tb1I7lzcBS9TqQOABP2-Course"
 dynlibdir  = "/Users/wonderbear/Exercise/Haskell/haskell-first-principles/Ch30/Course/.stack-work/install/x86_64-osx/89388ac213f6a72baccc7183496404f9ca677277b7c424beabf03b38b4b7792c/8.6.5/lib/x86_64-osx-ghc-8.6.5"
 datadir    = "/Users/wonderbear/Exercise/Haskell/haskell-first-principles/Ch30/Course/.stack-work/install/x86_64-osx/89388ac213f6a72baccc7183496404f9ca677277b7c424beabf03b38b4b7792c/8.6.5/share/x86_64-osx-ghc-8.6.5/Course-0.1.0.0"
 libexecdir = "/Users/wonderbear/Exercise/Haskell/haskell-first-principles/Ch30/Course/.stack-work/install/x86_64-osx/89388ac213f6a72baccc7183496404f9ca677277b7c424beabf03b38b4b7792c/8.6.5/libexec/x86_64-osx-ghc-8.6.5/Course-0.1.0.0"
