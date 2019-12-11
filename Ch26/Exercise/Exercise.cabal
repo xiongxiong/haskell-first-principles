@@ -21,4 +21,5 @@ executable Exercise
                        transformers,
                        containers,
                        text,
-                       scotty
+                       scotty,
+                       criterion

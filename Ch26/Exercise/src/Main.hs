@@ -7,6 +7,7 @@ import Control.Monad.Trans.State hiding (get)
 import Control.Monad.Trans.Class
 import Data.Functor.Identity
 import Control.Monad.Trans.Maybe
+import Control.Monad.Trans.Writer
 import Control.Monad.IO.Class
 import Control.Monad
 import Data.IORef
@@ -16,6 +17,7 @@ import Data.Text.Lazy (Text)
 import qualified Data.Text.Lazy as TL
 import System.Environment (getArgs)
 import Web.Scotty.Trans
+import Criterion.Main
 
 main :: IO ()
 main = do
@@ -103,6 +105,39 @@ testApp = do
   scottyT 3000 runR app
 
 ----------------------------------------------------------------
+
+newtype DiffList a = DiffList {getDiffList :: [a] -> [a]}
+
+toDiffList :: [a] -> DiffList a
+toDiffList = DiffList . (++)
+
+fromDiffList :: DiffList a -> [a]
+fromDiffList (DiffList f) = f []
+
+instance Semigroup (DiffList a) where
+  (DiffList f) <> (DiffList g) = DiffList (f . g)
+
+instance Monoid (DiffList a) where
+  mempty = DiffList ([]++)
+  mappend = (<>)
+
+countdown n = if (n == 0) then do {tell ["0"]} else do {countdown (n - 1); tell [show n]} :: Writer [String] ()
+
+countdownTest :: Int -> [String]
+countdownTest = snd . runWriter . countdown
+
+countdown' n = if (n == 0) then do {tell $ toDiffList ["0"]} else do {countdown' (n - 1); tell $ toDiffList [show n]} :: Writer (DiffList String) ()
+
+countdownTest'  :: Int -> [String]
+countdownTest' = fromDiffList . snd . runWriter . countdown'
+
+benchTest :: Int -> IO ()
+benchTest n = do
+  defaultMain 
+    ([
+      bench "countdown using ++" . nf countdownTest,
+      bench "countdown using DiffList" . nf countdownTest'
+    ] <*> pure n)
 
 ----------------------------------------------------------------
 

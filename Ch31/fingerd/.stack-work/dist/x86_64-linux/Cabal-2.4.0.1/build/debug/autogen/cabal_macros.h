@@ -22,28 +22,6 @@
   (major1) == 4 && (major2) == 12 && (minor) <= 0)
 #endif /* MIN_VERSION_base */
 
-/* package hlint-2.1.26 */
-#ifndef VERSION_hlint
-#define VERSION_hlint "2.1.26"
-#endif /* VERSION_hlint */
-#ifndef MIN_VERSION_hlint
-#define MIN_VERSION_hlint(major1,major2,minor) (\
-  (major1) <  2 || \
-  (major1) == 2 && (major2) <  1 || \
-  (major1) == 2 && (major2) == 1 && (minor) <= 26)
-#endif /* MIN_VERSION_hlint */
-
-/* package hoogle-5.0.17.11 */
-#ifndef VERSION_hoogle
-#define VERSION_hoogle "5.0.17.11"
-#endif /* VERSION_hoogle */
-#ifndef MIN_VERSION_hoogle
-#define MIN_VERSION_hoogle(major1,major2,minor) (\
-  (major1) <  5 || \
-  (major1) == 5 && (major2) <  0 || \
-  (major1) == 5 && (major2) == 0 && (minor) <= 17)
-#endif /* MIN_VERSION_hoogle */
-
 /* package network-2.8.0.1 */
 #ifndef VERSION_network
 #define VERSION_network "2.8.0.1"
@@ -199,7 +177,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "fingerd-0.1.0.0-7RjwXO2Koeck4nkqMOqhd-debug"
+#define CURRENT_COMPONENT_ID "fingerd-0.1.0.0-31UJFJX2MN34RAcGtsLEgM-debug"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"

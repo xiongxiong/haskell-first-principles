@@ -33,17 +33,6 @@
   (major1) == 0 && (major2) == 6 && (minor) <= 0)
 #endif /* MIN_VERSION_containers */
 
-/* package criterion-1.5.6.1 */
-#ifndef VERSION_criterion
-#define VERSION_criterion "1.5.6.1"
-#endif /* VERSION_criterion */
-#ifndef MIN_VERSION_criterion
-#define MIN_VERSION_criterion(major1,major2,minor) (\
-  (major1) <  1 || \
-  (major1) == 1 && (major2) <  5 || \
-  (major1) == 1 && (major2) == 5 && (minor) <= 6)
-#endif /* MIN_VERSION_criterion */
-
 /* package scotty-0.11.5 */
 #ifndef VERSION_scotty
 #define VERSION_scotty "0.11.5"
@@ -221,8 +210,11 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-4NvDEZPSvAa1DfhQDWSXdN-Exercise"
+#define CURRENT_COMPONENT_ID "Exercise-0.1.0.0-JNZekSDi1bX4ctnaUn0zzo-Exercise"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
 #endif /* CURRENT_PACKAGE_VERSION */
+
+#undef CURRENT_PACKAGE_KEY
+#undef CURRENT_COMPONENT_ID
