@@ -22,4 +22,6 @@ executable Exercise
                        containers,
                        text,
                        scotty,
-                       criterion
+                       criterion,
+                       random,
+                       mtl
