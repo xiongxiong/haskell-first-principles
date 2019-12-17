@@ -71,26 +71,37 @@ module Main where
 
 ---------------------------------------------------------------
 
-import Control.Concurrent (forkIO, threadDelay)
+import Control.Concurrent (threadDelay)
 import Control.Exception
-import System.IO
-
-openAndWrite :: IO ()
-openAndWrite = do
-  h <- openFile "test.dat" WriteMode
-  threadDelay 1500
-  hPutStr h (replicate 100000000 '0' ++ "abc")
-  hClose h
-
-data PleaseDie = PleaseDie deriving (Show)
-
-instance Exception PleaseDie
+import Control.Monad (forever)
 
 main :: IO ()
-main = do
-  threadId <- forkIO (mask_ openAndWrite)
-  threadDelay 1000
-  throwTo threadId PleaseDie
+main = (forever $ do
+  putStrLn "I'm happy"
+  threadDelay (1 * 1000000)) `catch` (\e -> putStrLn $ "I'm sad : " ++ show (e :: SomeException))
+
+---------------------------------------------------------------
+
+-- import Control.Concurrent (forkIO, threadDelay)
+-- import Control.Exception
+-- import System.IO
+
+-- openAndWrite :: IO ()
+-- openAndWrite = do
+--   h <- openFile "test.dat" WriteMode
+--   threadDelay 1500
+--   hPutStr h (replicate 100000000 '0' ++ "abc")
+--   hClose h
+
+-- data PleaseDie = PleaseDie deriving (Show)
+
+-- instance Exception PleaseDie
+
+-- main :: IO ()
+-- main = do
+--   threadId <- forkIO (mask_ openAndWrite)
+--   threadDelay 1000
+--   throwTo threadId PleaseDie
 
 ---------------------------------------------------------------
 

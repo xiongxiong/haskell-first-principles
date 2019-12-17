@@ -56,7 +56,7 @@ allUsers :: Query
 allUsers = "SELECT * FROM users"
 
 getUserQuery :: Query
-getUserQuery = "SELECT * from users where username = ?"
+getUserQuery = "SELECT * FROM users WHERE username = ?"
 
 data DuplicateData = DuplicateData deriving (Eq, Show, Typeable)
 
@@ -71,6 +71,11 @@ getUser conn username = do
     [] -> return Nothing
     [user] -> return $ Just user
     _ -> throwIO DuplicateData
+
+addNewUser :: UserRow -> IO ()
+addNewUser u = do 
+  conn <- open "finger.db"
+  execute conn insertUser u
 
 createDatabase :: IO ()
 createDatabase = do
