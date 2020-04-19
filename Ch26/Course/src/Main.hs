@@ -110,7 +110,8 @@ instance (Monad m) => Monad (StateT s m) where
 
 embedded :: MaybeT (ExceptT String (ReaderT () IO)) Int
 -- embedded = return 1
-embedded = MaybeT (ExceptT (ReaderT (const $ pure (Right (Just 1)))))
+-- embedded = MaybeT (ExceptT (ReaderT (const $ pure (Right (Just 1)))))
+embeded = MaybeT $ ExceptT $ ReaderT $ pure <*> (const (Right (Just 1)))
 
 maybeUnwrap :: ExceptT String (ReaderT () IO) (Maybe Int)
 maybeUnwrap = runMaybeT embedded
