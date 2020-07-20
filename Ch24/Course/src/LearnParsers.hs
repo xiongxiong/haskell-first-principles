@@ -30,14 +30,29 @@ oneTwo' = oneTwo >> stop
 oneEOF :: Parser Char
 oneEOF = one <* eof
 
-meantime :: String -> IO ()
-meantime s = (print . parseString (string "1") mempty $ s) >> (print . parseString (string "12") mempty $ s) >> (print . parseString (string "123") mempty $ s)
+-- meantime :: String -> IO ()
+-- meantime s = (print . parseString (string "1") mempty $ s) >> (print . parseString (string "12") mempty $ s) >> (print . parseString (string "123") mempty $ s)
 
-meantime' :: String -> [String] -> IO ()
-meantime' s ts = foldr1 (>>) $ print <$> (parseString <$> (string <$> ts) <*> pure mempty <*> pure s)
+-- meantime' :: String -> [String] -> IO ()
+-- meantime' s ts = foldr1 (>>) $ print <$> (parseString <$> (string <$> ts) <*> pure mempty <*> pure s)
+
+meantime'' :: Parser [String]
+meantime'' = do
+    x <- string "1"
+    y <- string "2"
+    z <- string "3"
+    pure [x, x <> y, x <> y <> z] <* eof
 
 string' :: (CharParsing m, Monad m, MonadIO m) => String -> m String
 string' s = sequence $ char <$> s
+
+-- string' :: String -> Parser String
+-- string' [] = pure ""
+-- string' (x:xs) = do
+--     c <- char x
+--     -- cs <- string' xs
+--     -- pure $ c : cs
+--     (:) <$> pure c <*> string' xs
 
 testParse :: Show a => Parser a -> IO ()
 testParse p = print $ parseString p mempty "123"
